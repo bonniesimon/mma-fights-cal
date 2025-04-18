@@ -144,11 +144,14 @@ app.use((err, req, res, next) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "client/dist")));
+// Serve static files only in production mode
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/dist")));
 
-app.get("/*splat", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/dist", "index.html"));
-});
+  app.get("/*splat", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/dist", "index.html"));
+  });
+}
 
 // Start server
 app.listen(PORT, () => {
