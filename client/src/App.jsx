@@ -1,5 +1,5 @@
 import "./App.css";
-import { useListEvents } from "./api/query/useEvents";
+import { useListEvents } from "./hooks/reactQuery/useEvents";
 
 function App() {
   const { data, isLoading } = useListEvents();
