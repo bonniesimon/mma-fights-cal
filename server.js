@@ -7,6 +7,7 @@ import path from "path";
 import sequelize from "./db/database.js";
 import { scrapeEvents, scrapeEventDetails } from "./scraper.js";
 import Event from "./models/Event.js";
+import { handleDate } from "./utils/dateConversion.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -37,12 +38,12 @@ app.get("/api/scrape", async (_, res) => {
   const events = await scrapeEvents();
   const eventDetails = await scrapeEventDetails(events);
 
-  console.log(eventDetails[0]);
-
   const eventsToBeSaved = eventDetails.map((event) => {
+    console.log(handleDate(event.date));
     return {
       ...event,
       eventId: event.link.split("/").at(-1),
+      date: handleDate(event.date),
     };
   });
 
