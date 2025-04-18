@@ -46,9 +46,12 @@ app.get("/api/scrape", async (_, res) => {
     };
   });
 
-  const newEvent = await Event.create(eventDetails[0]);
-  console.log(newEvent.title);
-  console.log(newEvent.fights);
+  for (const event of eventsToBeSaved) {
+    await Event.findOrCreate({
+      where: { eventId: event.eventId },
+      defaults: { ...event },
+    });
+  }
 
   res.json({ status: 200 });
 });
