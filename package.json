@@ -1,8 +1,10 @@
 {
   "scripts": {
     "start": "node server.js",
-    "build": "cd client && npm install && npm run build",
-    "dev": "concurrently \"cd client && npm run dev\" \"nodemon server.js\""
+    "build": "cd client && yarn && yarn build",
+    "server": "nodemon server.js",
+    "client": "cd client && yarn dev",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
   },
   "type": "module",
   "dependencies": {
