@@ -107,40 +107,11 @@ app.get("/api/events/details", async (req, res) => {
 
 // Get single event details by ID
 app.get("/api/events/:eventId", async (req, res) => {
-  try {
-    const eventId = req.params.eventId;
+  const eventId = req.params.eventId;
 
-    // First try to get events from cache or fetch fresh data
-    let events;
-    if (eventsCache && isCacheValid()) {
-      events = eventsCache;
-    } else {
-      events = await scrapeEvents();
-      eventsCache = events;
-      lastFetchTime = Date.now();
-    }
+  const event = await Event.findOne({ where: { eventId: eventId } });
 
-    // Find the event with the matching ID (from the last part of the URL)
-    const event = events.find((e) => {
-      const urlParts = e.link.split("/");
-      const linkId = urlParts[urlParts.length - 1];
-      return linkId === eventId;
-    });
-
-    if (!event) {
-      return res.status(404).json({ error: "Event not found" });
-    }
-
-    // Get the full details for just this event
-    const [eventWithDetails] = await scrapeEventDetails([event]);
-
-    res.json(eventWithDetails);
-  } catch (error) {
-    console.error("API Error:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to fetch event details", message: error.message });
-  }
+  res.json(event);
 });
 
 // Clear cache endpoint
