@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
-import { scrapeEvents, scrapeEventDetails } from "./scraper.js";
+import { Sequelize } from "sequelize";
 import path from "path";
+
+import sequelize from "./db/database.js";
+import { scrapeEvents, scrapeEventDetails } from "./scraper.js";
+import Event from "./models/Event.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +25,33 @@ const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
 const isCacheValid = () => {
   return lastFetchTime && Date.now() - lastFetchTime < CACHE_DURATION;
 };
+
+try {
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
+} catch (error) {
+  console.error("Unable to connect to the database:", error);
+}
+
+app.get("/api/scrape", async (_, res) => {
+  const events = await scrapeEvents();
+  const eventDetails = await scrapeEventDetails(events);
+
+  console.log(eventDetails[0]);
+
+  const eventsToBeSaved = eventDetails.map((event) => {
+    return {
+      ...event,
+      eventId: event.link.split("/").at(-1),
+    };
+  });
+
+  const newEvent = await Event.create(eventDetails[0]);
+  console.log(newEvent.title);
+  console.log(newEvent.fights);
+
+  res.json({ status: 200 });
+});
 
 // Routes
 app.get("/api", (req, res) => {
