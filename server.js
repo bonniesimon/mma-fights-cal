@@ -72,26 +72,9 @@ app.get("/api", (req, res) => {
 
 // Get upcoming events
 app.get("/api/events", async (req, res) => {
-  try {
-    if (eventsCache && isCacheValid()) {
-      console.log("Serving events from cache");
-      return res.json(eventsCache);
-    }
+  const events = await Event.findAll();
 
-    console.log("Fetching fresh events data...");
-    const events = await scrapeEvents();
-
-    // Update cache
-    eventsCache = events;
-    lastFetchTime = Date.now();
-
-    res.json(events);
-  } catch (error) {
-    console.error("API Error:", error);
-    res
-      .status(500)
-      .json({ error: "Failed to fetch events", message: error.message });
-  }
+  res.json(events);
 });
 
 // Get upcoming events with detailed fight cards
