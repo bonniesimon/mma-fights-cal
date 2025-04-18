@@ -13,6 +13,10 @@ Event.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    eventId: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
     link: {
       type: DataTypes.STRING,
       allowNull: false,
