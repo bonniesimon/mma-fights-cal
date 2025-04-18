@@ -1,8 +1,9 @@
 import "./App.css";
 import { useListEvents } from "./hooks/reactQuery/useEvents";
+import { toIst } from "./utils/date";
 
 function App() {
-  const { data, isLoading } = useListEvents();
+  const { data: { data } = {}, isLoading } = useListEvents();
 
   if (isLoading) {
     return <h1>Loading</h1>;
@@ -10,8 +11,11 @@ function App() {
 
   return (
     <>
-      {data.data.map((event) => (
-        <h1 key={event.link}>{event.title}</h1>
+      {data.map((event) => (
+        <div key={event.link}>
+          <h3>{event.title}</h3>
+          <p>{toIst(event.date)}</p>
+        </div>
       ))}
     </>
   );
