@@ -1,6 +1,5 @@
-import { Spinner, Box, Container, Flex, Text, Center } from "@chakra-ui/react";
+import { Spinner, Box, Container, Flex, Text } from "@chakra-ui/react";
 import { useListEvents } from "./hooks/reactQuery/useEvents";
-import { toIst } from "./utils/date";
 import EventItem from "./components/EventItem";
 
 function App() {
