@@ -1,4 +1,4 @@
-import { Spinner, Box, Container } from "@chakra-ui/react";
+import { Spinner, Box, Container, Flex, Text, Center } from "@chakra-ui/react";
 import { useListEvents } from "./hooks/reactQuery/useEvents";
 import { toIst } from "./utils/date";
 import EventItem from "./components/EventItem";
@@ -22,7 +22,22 @@ function App() {
   }
 
   return (
-    <Box bg="gray.800" minH="100vh">
+    <Box bg="gray.800" minH="100vh" color="white">
+      <Flex
+        as="header"
+        position="sticky"
+        top="0"
+        bg="gray.800"
+        backdropFilter="saturate(180%) blur(5px)"
+        w="100%"
+        p="3"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text fontSize="xl" fontWeight="bold" mb={4} textAlign="center">
+          Fight Schedule
+        </Text>
+      </Flex>
       <Container bg="gray.800" maxW="container.sm" py={4} color="white">
         {data.map((event) => (
           <EventItem
