@@ -21,23 +21,41 @@ function App() {
   }
 
   return (
-    <Box bg="gray.800" minH="100vh" color="white">
+    <Box
+      minH="100vh"
+      color="white"
+      bgGradient="linear(to-br, gray.900 60%, gray.800 100%)"
+      transition="all 0.2s"
+    >
       <Flex
         as="header"
         position="sticky"
         top="0"
-        bg="gray.800"
-        backdropFilter="saturate(180%) blur(5px)"
+        zIndex={100}
+        bg="rgba(26, 32, 44, 0.95)"
+        boxShadow="lg"
         w="100%"
-        p="3"
+        px={{ base: 4, md: 8 }}
+        py={3}
         alignItems="center"
         justifyContent="center"
+        backdropFilter="saturate(180%) blur(6px)"
       >
-        <Text fontSize="xl" fontWeight="bold" mb={4} textAlign="center">
+        <Text
+          fontSize={{ base: "2xl", md: "3xl" }}
+          fontWeight="extrabold"
+          letterSpacing="tight"
+          textAlign="center"
+          color="blue.50"
+        >
           Fight Schedule
         </Text>
       </Flex>
-      <Container bg="gray.800" maxW="container.sm" py={4} color="white">
+      <Container
+        maxW="container.md"
+        py={{ base: 6, md: 10 }}
+        px={{ base: 2, md: 0 }}
+      >
         {data.map((event) => (
           <EventItem key={event.id} event={event} />
         ))}
