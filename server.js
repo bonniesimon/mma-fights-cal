@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
-import { Sequelize } from "sequelize";
 import path from "path";
 
 import sequelize from "./db/database.js";
@@ -16,17 +15,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Cache data with expiration
-let eventsCache = null;
-let detailedEventsCache = null;
-let lastFetchTime = null;
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
-
-// Check if cache is valid
-const isCacheValid = () => {
-  return lastFetchTime && Date.now() - lastFetchTime < CACHE_DURATION;
-};
-
+// ORM connection
 try {
   await sequelize.authenticate();
   console.log("Connection has been established successfully.");
@@ -57,55 +46,12 @@ app.get("/api/scrape", async (_, res) => {
   res.json({ status: 200 });
 });
 
-// Routes
-app.get("/api", (req, res) => {
-  res.json({
-    message: "MMA Events Scraper API",
-    endpoints: [
-      { path: "/api/events", description: "Get upcoming MMA events" },
-      {
-        path: "/api/events/details",
-        description: "Get upcoming MMA events with fight details",
-      },
-    ],
-  });
-});
-
-// Get upcoming events
 app.get("/api/events", async (req, res) => {
   const events = await Event.findAll();
 
   res.json(events);
 });
 
-// Get upcoming events with detailed fight cards
-app.get("/api/events/details", async (req, res) => {
-  try {
-    if (detailedEventsCache && isCacheValid()) {
-      console.log("Serving detailed events from cache");
-      return res.json(detailedEventsCache);
-    }
-
-    console.log("Fetching fresh detailed events data...");
-    const events = await scrapeEvents();
-    const eventsWithDetails = await scrapeEventDetails(events);
-
-    // Update cache
-    eventsCache = events;
-    detailedEventsCache = eventsWithDetails;
-    lastFetchTime = Date.now();
-
-    res.json(eventsWithDetails);
-  } catch (error) {
-    console.error("API Error:", error);
-    res.status(500).json({
-      error: "Failed to fetch detailed events",
-      message: error.message,
-    });
-  }
-});
-
-// Get single event details by ID
 app.get("/api/events/:eventId", async (req, res) => {
   const eventId = req.params.eventId;
 
@@ -114,15 +60,6 @@ app.get("/api/events/:eventId", async (req, res) => {
   res.json(event);
 });
 
-// Clear cache endpoint
-app.post("/api/cache/clear", (req, res) => {
-  eventsCache = null;
-  detailedEventsCache = null;
-  lastFetchTime = null;
-  res.json({ message: "Cache cleared successfully" });
-});
-
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
   res
@@ -142,7 +79,6 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Start server
 app.listen(PORT, () => {
   console.log(`MMA Events API server running on port ${PORT}`);
 });
