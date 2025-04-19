@@ -4,7 +4,8 @@
     "build": "cd client && yarn && yarn build",
     "server": "nodemon server.js",
     "client": "cd client && yarn dev",
-    "dev": "concurrently \"yarn server\" \"yarn client\""
+    "dev": "concurrently \"yarn server\" \"yarn client\"",
+    "postinstall": "yarn sequelize db:migrate"
   },
   "type": "module",
   "dependencies": {
