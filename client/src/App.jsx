@@ -1,4 +1,4 @@
-import "./App.css";
+import { Button } from "@chakra-ui/react";
 import { useListEvents } from "./hooks/reactQuery/useEvents";
 import { toIst } from "./utils/date";
 
