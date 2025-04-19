@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box, Tooltip } from "@chakra-ui/react";
 const FightItem = ({ fight }) => {
   return (
     <Box
@@ -30,15 +30,17 @@ const FightItem = ({ fight }) => {
             />
           </Box>
           <Box minW={0}>
-            <Flex align="center" gap={2} mb={1}>
+            <Flex align="center" gap={2} mb={1} whiteSpace="nowrap" minW={0}>
               <a
                 href={fight.fighterA.link}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Text fontWeight="bold" fontSize="lg" isTruncated>
-                  {fight.fighterA.name}
-                </Text>
+                <Tooltip label={fight.fighterA.name} placement="top" hasArrow>
+                  <Text fontWeight="bold" fontSize="lg" isTruncated textOverflow="ellipsis" overflow="hidden" maxW="120px">
+                    {fight.fighterA.name}
+                  </Text>
+                </Tooltip>
               </a>
               <img
                 src={fight.fighterA.country}
@@ -61,7 +63,7 @@ const FightItem = ({ fight }) => {
           direction="column"
           align="center"
           justify="center"
-          mx={4}
+          mx={6} // increased margin for more space
           minW="80px"
         >
           <Text fontWeight="bold" fontSize="xl" color="yellow.200">
@@ -74,7 +76,7 @@ const FightItem = ({ fight }) => {
 
         <Flex align="center" flex={1} minW={0} gap={3} justify="flex-end">
           <Box minW={0} textAlign="right">
-            <Flex align="center" gap={2} mb={1} justify="flex-end">
+            <Flex align="center" gap={2} mb={1} justify="flex-end" whiteSpace="nowrap" minW={0}>
               <img
                 src={fight.fighterB.country}
                 alt="flag"
@@ -90,9 +92,11 @@ const FightItem = ({ fight }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Text fontWeight="bold" fontSize="lg" isTruncated>
-                  {fight.fighterB.name}
-                </Text>
+                <Tooltip label={fight.fighterB.name} placement="top" hasArrow>
+                  <Text fontWeight="bold" fontSize="lg" isTruncated textOverflow="ellipsis" overflow="hidden" maxW="120px">
+                    {fight.fighterB.name}
+                  </Text>
+                </Tooltip>
               </a>
             </Flex>
             <Text fontSize="sm" color="gray.200">
