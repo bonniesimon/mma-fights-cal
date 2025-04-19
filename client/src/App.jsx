@@ -40,12 +40,7 @@ function App() {
       </Flex>
       <Container bg="gray.800" maxW="container.sm" py={4} color="white">
         {data.map((event) => (
-          <EventItem
-            key={event.id}
-            eventId={event.eventId}
-            title={event.title}
-            date={toIst(event.date)}
-          />
+          <EventItem key={event.id} event={event} />
         ))}
       </Container>
     </Box>

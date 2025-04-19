@@ -12,12 +12,16 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Link,
 } from "@chakra-ui/react";
 import { Calendar, ChevronRight } from "lucide-react";
 import EventModal from "./EventModal";
+import { toIst } from "../utils/date";
 
-const EventItem = ({ eventId, title, date }) => {
+const EventItem = ({ event }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { title, eventId, date } = event;
 
   return (
     <>
@@ -36,12 +40,14 @@ const EventItem = ({ eventId, title, date }) => {
             <Flex alignItems="center" mt={1}>
               <Icon as={Calendar} color="gray.300" w={3} h={3} mr={1} />
               <Text fontSize="sm" color="gray.300">
-                {date}
+                {toIst(date)}
               </Text>
             </Flex>
           </Box>
           <Flex>
-            <Icon as={Calendar} color="white" mr={2} />
+            <Link isExternal href="">
+              <Icon as={Calendar} color="white" mr={2} />
+            </Link>
             <Icon as={ChevronRight} color="white" onClick={onOpen} />
           </Flex>
         </Flex>
