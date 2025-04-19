@@ -342,6 +342,13 @@ cacheable-request@^12.0.1:
     normalize-url "^8.0.1"
     responselike "^3.0.0"
 
+calendar-link@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/calendar-link/-/calendar-link-2.8.0.tgz#9b1533f0db0b2ee5afc8492b27efa655078f67fe"
+  integrity sha512-N1mXUpoMc2czw30LxPHKNSGuekwXeZ2AHlQVfpY/6aBkFEbDpO9c8suM/NIJ9eSVLu0HaCgmAq0MeXZDgva/nw==
+  dependencies:
+    dayjs "^1.9.3"
+
 call-bind-apply-helpers@^1.0.1, call-bind-apply-helpers@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/call-bind-apply-helpers/-/call-bind-apply-helpers-1.0.2.tgz#4b5428c222be985d79c3d82657479dbe0b59b2d6"
@@ -584,6 +591,11 @@ d@1, d@^1.0.1, d@^1.0.2:
   dependencies:
     es5-ext "^0.10.64"
     type "^2.7.2"
+
+dayjs@^1.9.3:
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.13.tgz#92430b0139055c3ebb60150aa13e860a4b5a366c"
+  integrity sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==
 
 debug@4, debug@^4, debug@^4.3.3, debug@^4.3.4, debug@^4.3.5, debug@^4.4.0:
   version "4.4.0"

@@ -17,11 +17,14 @@ import {
 import { Calendar, ChevronRight } from "lucide-react";
 import EventModal from "./EventModal";
 import { toIst } from "../utils/date";
+import { generateGoogleCalendarLink } from "../utils/calendarLink";
 
 const EventItem = ({ event }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { title, eventId, date } = event;
+
+  const googleCalendarLink = generateGoogleCalendarLink(event);
 
   return (
     <>
@@ -45,7 +48,7 @@ const EventItem = ({ event }) => {
             </Flex>
           </Box>
           <Flex>
-            <Link isExternal href="">
+            <Link isExternal href={googleCalendarLink}>
               <Icon as={Calendar} color="white" mr={2} />
             </Link>
             <Icon as={ChevronRight} color="white" onClick={onOpen} />
