@@ -10,10 +10,12 @@ import {
   ModalCloseButton,
   SkeletonText,
   Box,
+  Link,
 } from "@chakra-ui/react";
 import { useShowEvents } from "../hooks/reactQuery/useEvents";
 import { toIst } from "../utils/date";
 import FightItem from "./FightItem";
+import { generateGoogleCalendarLink } from "../utils/calendarLink";
 
 const EventModal = ({ eventId, isOpen, onClose }) => {
   const { data: { data } = {}, isLoading } = useShowEvents({
@@ -102,7 +104,9 @@ const EventModal = ({ eventId, isOpen, onClose }) => {
 
       <ModalFooter>
         <ModalCloseButton />
-        <Button>Add to Calendar</Button>
+        <Link isExternal href={`${generateGoogleCalendarLink(data)}`}>
+          <Button>Add to Calendar</Button>
+        </Link>
       </ModalFooter>
     </ModalWrapper>
   );
