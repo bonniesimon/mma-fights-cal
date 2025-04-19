@@ -7,3 +7,10 @@ export const useListEvents = () => {
     queryFn: () => eventsApi.list(),
   });
 };
+
+export const useShowEvents = ({ eventId, enabled }) =>
+  useQuery({
+    queryKey: ["events", eventId],
+    queryFn: () => eventsApi.show(eventId),
+    enabled,
+  });

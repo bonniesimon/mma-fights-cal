@@ -41,7 +41,8 @@ function App() {
       <Container bg="gray.800" maxW="container.sm" py={4} color="white">
         {data.map((event) => (
           <EventItem
-            key={event.link}
+            key={event.id}
+            eventId={event.eventId}
             title={event.title}
             date={toIst(event.date)}
           />

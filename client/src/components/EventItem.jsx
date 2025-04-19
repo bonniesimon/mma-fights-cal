@@ -14,8 +14,9 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react";
 import { Calendar, ChevronRight } from "lucide-react";
+import EventModal from "./EventModal";
 
-const EventItem = ({ title, date }) => {
+const EventItem = ({ eventId, title, date }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -45,19 +46,12 @@ const EventItem = ({ title, date }) => {
           </Flex>
         </Flex>
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
-        <ModalOverlay />
-        <ModalContent bg="gray.700" color="white">
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody></ModalBody>
-
-          <ModalFooter>
-            <ModalCloseButton />
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <EventModal
+        eventId={eventId}
+        title={title}
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </>
   );
 };
