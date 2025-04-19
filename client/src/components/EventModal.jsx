@@ -21,9 +21,10 @@ const EventModal = ({ eventId, isOpen, onClose }) => {
     enabled: isOpen,
   });
 
-  console.log(data);
+  const validateFights = (fights) => Array.isArray(fights) && fights.length > 0;
 
-  if (!isOpen) return;
+  const mainFights = data?.fights.filter((fight) => fight.main) || [];
+  const nonMainFights = data?.fights.filter((fight) => !fight.main) || [];
 
   if (!data || isLoading) {
     return (
@@ -48,8 +49,51 @@ const EventModal = ({ eventId, isOpen, onClose }) => {
           <Text>{toIst(data.date)}</Text>
         </Box>
         <Box>
-          {Array.isArray(data.fights) && data.fights.length > 0 ? (
-            data.fights.map((fight) => <FightItem fight={fight} />)
+          <Box width="fit-content" mx="auto">
+            <Text
+              fontSize="xs"
+              fontWeight="bold"
+              color="yellow.300"
+              bg="gray.800"
+              px={2}
+              py={1}
+              mb="2"
+              borderRadius="md"
+            >
+              Main Event
+            </Text>
+          </Box>
+          {validateFights(mainFights) ? (
+            mainFights.map((fight) => (
+              <FightItem
+                key={fight.fighterA.name + fight.fighterB.name}
+                fight={fight}
+              />
+            ))
+          ) : (
+            <Text color="gray.400">No fights available.</Text>
+          )}
+          <Box width="fit-content" mx="auto">
+            <Text
+              fontSize="xs"
+              fontWeight="bold"
+              color="yellow.300"
+              bg="gray.800"
+              px={2}
+              py={1}
+              mb="2"
+              borderRadius="md"
+            >
+              Prelims Event
+            </Text>
+          </Box>
+          {validateFights(nonMainFights) ? (
+            nonMainFights.map((fight) => (
+              <FightItem
+                key={fight.fighterA.name + fight.fighterB.name}
+                fight={fight}
+              />
+            ))
           ) : (
             <Text color="gray.400">No fights available.</Text>
           )}

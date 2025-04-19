@@ -2,7 +2,6 @@ import { Flex, Text, Box } from "@chakra-ui/react";
 const FightItem = ({ fight }) => {
   return (
     <Box
-      key={fight.fighterA.name + fight.fighterB.name}
       mb={4}
       p={4}
       borderRadius="lg"
@@ -11,21 +10,6 @@ const FightItem = ({ fight }) => {
       border={fight.main ? "2px solid #ECC94B" : "1px solid #444"}
       position="relative"
     >
-      {fight.main && (
-        <Box position="absolute" top={2} right={2}>
-          <Text
-            fontSize="xs"
-            fontWeight="bold"
-            color="yellow.300"
-            bg="gray.800"
-            px={2}
-            py={1}
-            borderRadius="md"
-          >
-            Main Event
-          </Text>
-        </Box>
-      )}
       <Flex
         align="center"
         justify="space-between"
