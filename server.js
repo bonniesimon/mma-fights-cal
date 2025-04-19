@@ -11,11 +11,9 @@ import { handleDate } from "./utils/dateConversion.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// ORM connection
 try {
   await sequelize.authenticate();
   console.log("Connection has been established successfully.");
@@ -27,14 +25,11 @@ app.get("/api/scrape", async (_, res) => {
   const events = await scrapeEvents();
   const eventDetails = await scrapeEventDetails(events);
 
-  const eventsToBeSaved = eventDetails.map((event) => {
-    console.log(handleDate(event.date));
-    return {
-      ...event,
-      eventId: event.link.split("/").at(-1),
-      date: handleDate(event.date),
-    };
-  });
+  const eventsToBeSaved = eventDetails.map((event) => ({
+    ...event,
+    eventId: event.link.split("/").at(-1),
+    date: handleDate(event.date),
+  }));
 
   for (const event of eventsToBeSaved) {
     await Event.findOrCreate({
