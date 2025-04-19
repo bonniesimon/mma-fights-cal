@@ -1,4 +1,5 @@
-import { Flex, Text, Box, Tooltip } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
+import TruncatableTooltipText from "./TruncatableTooltipText";
 const FightItem = ({ fight }) => {
   return (
     <Box
@@ -36,11 +37,9 @@ const FightItem = ({ fight }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Tooltip label={fight.fighterA.name} placement="top" hasArrow>
-                  <Text fontWeight="bold" fontSize="lg" isTruncated textOverflow="ellipsis" overflow="hidden" maxW="120px">
-                    {fight.fighterA.name}
-                  </Text>
-                </Tooltip>
+                <TruncatableTooltipText fontWeight="bold" fontSize="lg" maxW="120px">
+  {fight.fighterA.name}
+</TruncatableTooltipText>
               </a>
               <img
                 src={fight.fighterA.country}
@@ -92,11 +91,9 @@ const FightItem = ({ fight }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Tooltip label={fight.fighterB.name} placement="top" hasArrow>
-                  <Text fontWeight="bold" fontSize="lg" isTruncated textOverflow="ellipsis" overflow="hidden" maxW="120px">
-                    {fight.fighterB.name}
-                  </Text>
-                </Tooltip>
+                <TruncatableTooltipText fontWeight="bold" fontSize="lg" maxW="120px">
+  {fight.fighterB.name}
+</TruncatableTooltipText>
               </a>
             </Flex>
             <Text fontSize="sm" color="gray.200">
