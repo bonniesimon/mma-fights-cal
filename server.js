@@ -7,6 +7,7 @@ import sequelize from "./db/database.js";
 import { scrapeEvents, scrapeEventDetails } from "./scraper.js";
 import Event from "./models/Event.js";
 import { handleDate } from "./utils/dateConversion.js";
+import EventsController from "./controllers/eventsController.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -41,11 +42,7 @@ app.get("/api/scrape", async (_, res) => {
   res.json({ status: 200 });
 });
 
-app.get("/api/events", async (req, res) => {
-  const events = await Event.findAll();
-
-  res.json(events);
-});
+app.get("/api/events", EventsController.index);
 
 app.get("/api/events/:eventId", async (req, res) => {
   const eventId = req.params.eventId;
