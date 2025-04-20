@@ -10,9 +10,11 @@
   },
   "type": "module",
   "dependencies": {
+    "body-parser": "^2.2.0",
     "calendar-link": "^2.8.0",
     "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "got-scraping": "^4.0.6",
     "moment-timezone": "^0.5.48",

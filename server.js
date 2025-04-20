@@ -3,10 +3,12 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 import morgan from "morgan";
+import "dotenv/config";
 
 import sequelize from "./db/database.js";
 import EventsController from "./controllers/eventsController.js";
 import ScrapeController from "./controllers/scrapeController.js";
+import bodyParser from "body-parser";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +17,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("common"));
 
 try {
@@ -24,7 +27,8 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-app.get("/api/scrape", ScrapeController.scrape);
+app.get("/api/scrape", ScrapeController.show);
+app.post("/api/scrape", ScrapeController.scrape);
 
 app.get("/api/events", EventsController.index);
 app.get("/api/events/:eventId", EventsController.show);
