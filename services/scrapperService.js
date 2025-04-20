@@ -31,7 +31,7 @@ const scrapeEvents = async () => {
       .filter(
         (event) =>
           majorOrgs.some((org) => event.title.toUpperCase().includes(org)) &&
-          !event.title.toUpperCase().includes("ONE FRIDAY FIGHTS"),
+          !event.title.toUpperCase().includes("ONE FRIDAY FIGHTS")
       )
       .slice(0, 10); // Limit to 10 events
 
@@ -61,7 +61,7 @@ const scrapeEventDetails = async (events) => {
           .map((el) => {
             const main = $(el)
               .find(
-                "a.hover\\:border-solid.hover\\:border-b.hover\\:border-neutral-950.hover\\:text-neutral-950",
+                "a.hover\\:border-solid.hover\\:border-b.hover\\:border-neutral-950.hover\\:text-neutral-950"
               )
               .text()
               .toLowerCase()
@@ -69,14 +69,14 @@ const scrapeEventDetails = async (events) => {
 
             const weight = $(el)
               .find(
-                "span.px-1\\.5.md\\:px-1.leading-\\[23px\\].text-sm.md\\:text-\\[13px\\].text-neutral-50.rounded",
+                "span.px-1\\.5.md\\:px-1.leading-\\[23px\\].text-sm.md\\:text-\\[13px\\].text-neutral-50.rounded"
               )
               .text()
               .trim()
               .substring(0, 3);
 
             const fighterContainers = $(el).find(
-              ".div.flex.flex-row.gap-0\\.5.md\\:gap-0.w-full",
+              ".div.flex.flex-row.gap-0\\.5.md\\:gap-0.w-full"
             );
 
             const fighterAContainer = fighterContainers.eq(0);
@@ -90,12 +90,12 @@ const scrapeEventDetails = async (events) => {
                 baseUrl +
                 fighterAContainer
                   .find(
-                    ".opacity-70.h-\\[14px\\].md\\:h-\\[11px\\].w-\\[22px\\].md\\:w-\\[17px\\]",
+                    ".opacity-70.h-\\[14px\\].md\\:h-\\[11px\\].w-\\[22px\\].md\\:w-\\[17px\\]"
                   )
                   .attr("src"),
               picture: fighterAContainer
                 .find(
-                  ".w-\\[77px\\].h-\\[77px\\].md\\:w-\\[104px\\].md\\:h-\\[104px\\].rounded",
+                  ".w-\\[77px\\].h-\\[77px\\].md\\:w-\\[104px\\].md\\:h-\\[104px\\].rounded"
                 )
                 .attr("src"),
               link:
@@ -114,12 +114,12 @@ const scrapeEventDetails = async (events) => {
                 baseUrl +
                 fighterBContainer
                   .find(
-                    ".opacity-70.h-\\[14px\\].md\\:h-\\[11px\\].w-\\[22px\\].md\\:w-\\[17px\\]",
+                    ".opacity-70.h-\\[14px\\].md\\:h-\\[11px\\].w-\\[22px\\].md\\:w-\\[17px\\]"
                   )
                   .attr("src"),
               picture: fighterBContainer
                 .find(
-                  ".w-\\[77px\\].h-\\[77px\\].md\\:w-\\[104px\\].md\\:h-\\[104px\\].rounded",
+                  ".w-\\[77px\\].h-\\[77px\\].md\\:w-\\[104px\\].md\\:h-\\[104px\\].rounded"
                 )
                 .attr("src"),
               link:
@@ -132,7 +132,7 @@ const scrapeEventDetails = async (events) => {
 
         event.fights = fights;
         return event;
-      }),
+      })
     );
 
     return eventsWithFights.filter((event) => event.fights.length > 0);
