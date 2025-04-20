@@ -1,8 +1,15 @@
+import { Op } from "sequelize";
 import Event from "../models/Event.js";
 
 class EventsController {
   static async index(_, res) {
-    const events = await Event.findAll();
+    const events = await Event.findAll({
+      where: {
+        date: {
+          [Op.gt]: new Date(new Date().setHours(0, 0, 0, 0)),
+        },
+      },
+    });
 
     res.json(events);
   }
