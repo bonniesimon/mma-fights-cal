@@ -11,6 +11,7 @@ const { scrapeEvents, scrapeEventDetails } = await import(
   "../services/scrapperService.js"
 );
 
+// In the future if this structure changes in Tapology, then I should comeback and update this to the tapology HTML.
 const mockEventsHtml = `
 <div class="fightcenterEvents">
   <div>
@@ -28,6 +29,7 @@ const mockEventsHtml = `
 </div>
 `;
 
+// In the future if this structure changes in Tapology, then I should comeback and update this to the tapology HTML.
 const mockEventDetailsHtml = `
 <ul class="mt-5" data-event-view-toggle-target="list">
   <li>
