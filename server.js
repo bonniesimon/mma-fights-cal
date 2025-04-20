@@ -9,6 +9,8 @@ import ScrapeController from "./controllers/scrapeController.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
@@ -31,9 +33,6 @@ app.use((err, req, res, next) => {
     .status(500)
     .json({ error: "Internal server error", message: err.message });
 });
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Serve static files only in production mode
 if (process.env.NODE_ENV === "production") {
