@@ -38,7 +38,10 @@ const scrapeEvents = async () => {
     return events;
   } catch (error) {
     console.error("Scraping error:", error);
-    throw new Error("Error during scraping: ", error);
+    throw new Error(
+      "Error during scraping: " +
+        (error && error.message ? error.message : error)
+    );
   }
 };
 
@@ -51,7 +54,7 @@ const scrapeEventDetails = async (events) => {
         });
 
         if (eventResponse.statusCode !== 200) {
-          throw new Error("Failed to fetch for: ", event.link);
+          throw new Error("Failed to fetch for: " + event.link);
         }
 
         const $ = cheerio.load(eventResponse.body);
@@ -138,7 +141,10 @@ const scrapeEventDetails = async (events) => {
     return eventsWithFights.filter((event) => event.fights.length > 0);
   } catch (error) {
     console.error("Error during scraping event details:", error);
-    throw new Error("Error during scraping event details:", error);
+    throw new Error(
+      "Error during scraping event details: " +
+        (error && error.message ? error.message : error)
+    );
   }
 };
 
