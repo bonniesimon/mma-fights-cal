@@ -4,10 +4,8 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 import sequelize from "./db/database.js";
-import { scrapeEvents, scrapeEventDetails } from "./scraper.js";
-import Event from "./models/Event.js";
-import { handleDate } from "./utils/dateConversion.js";
 import EventsController from "./controllers/eventsController.js";
+import ScrapeController from "./controllers/scrapeController.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,25 +20,7 @@ try {
   console.error("Unable to connect to the database:", error);
 }
 
-app.get("/api/scrape", async (_, res) => {
-  const events = await scrapeEvents();
-  const eventDetails = await scrapeEventDetails(events);
-
-  const eventsToBeSaved = eventDetails.map((event) => ({
-    ...event,
-    eventId: event.link.split("/").at(-1),
-    date: handleDate(event.date),
-  }));
-
-  for (const event of eventsToBeSaved) {
-    await Event.findOrCreate({
-      where: { eventId: event.eventId },
-      defaults: { ...event },
-    });
-  }
-
-  res.json({ status: 200 });
-});
+app.get("/api/scrape", ScrapeController.scrape);
 
 app.get("/api/events", EventsController.index);
 app.get("/api/events/:eventId", EventsController.show);
