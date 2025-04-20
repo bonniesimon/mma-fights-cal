@@ -1,16 +1,13 @@
-import {
-  scrapeEvents,
-  scrapeEventDetails,
-} from "../services/scrapperService.js";
 import Event from "../models/Event.js";
 import { handleDate } from "../utils/dateConversion.js";
+import TapologyService from "../services/tapologyService.js";
 
 class ScrapeController {
   static async scrape(_, res) {
-    const events = await scrapeEvents();
-    const eventDetails = await scrapeEventDetails(events);
+    const tapologyService = new TapologyService();
+    const events = await tapologyService.events();
 
-    const eventsToBeSaved = eventDetails.map((event) => ({
+    const eventsToBeSaved = events.map((event) => ({
       ...event,
       eventId: event.link.split("/").at(-1),
       date: handleDate(event.date),
