@@ -1,4 +1,7 @@
-import { scrapeEvents, scrapeEventDetails } from "../scraper.js";
+import {
+  scrapeEvents,
+  scrapeEventDetails,
+} from "../services/scrapperService.js";
 import Event from "../models/Event.js";
 import { handleDate } from "../utils/dateConversion.js";
 

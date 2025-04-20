@@ -27,7 +27,7 @@ app.get("/api/scrape", ScrapeController.scrape);
 app.get("/api/events", EventsController.index);
 app.get("/api/events/:eventId", EventsController.show);
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error("Server error:", err);
   res
     .status(500)
