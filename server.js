@@ -43,14 +43,7 @@ app.get("/api/scrape", async (_, res) => {
 });
 
 app.get("/api/events", EventsController.index);
-
-app.get("/api/events/:eventId", async (req, res) => {
-  const eventId = req.params.eventId;
-
-  const event = await Event.findOne({ where: { eventId: eventId } });
-
-  res.json(event);
-});
+app.get("/api/events/:eventId", EventsController.show);
 
 app.use((err, req, res, next) => {
   console.error("Server error:", err);

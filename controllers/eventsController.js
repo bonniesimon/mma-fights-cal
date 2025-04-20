@@ -6,6 +6,14 @@ class EventsController {
 
     res.json(events);
   }
+
+  static async show(req, res) {
+    const eventId = req.params.eventId;
+
+    const event = await Event.findOne({ where: { eventId: eventId } });
+
+    res.json(event);
+  }
 }
 
 export default EventsController;
