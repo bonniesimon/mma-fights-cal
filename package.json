@@ -6,7 +6,8 @@
     "server": "nodemon server.js",
     "client": "cd client && yarn dev",
     "dev": "concurrently \"yarn server\" \"yarn client\"",
-    "postinstall": "yarn sequelize db:migrate"
+    "postinstall": "yarn sequelize db:migrate",
+    "client:lint": "cd client && yarn lint"
   },
   "type": "module",
   "dependencies": {
