@@ -1,15 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import eventsApi from "../../api/events";
 
+import { Event } from "../../types/Event";
+
 export const useListEvents = () => {
-  return useQuery({
+  return useQuery<Event[], Error>({
     queryKey: ["events"],
     queryFn: () => eventsApi.list(),
   });
 };
 
-export const useShowEvents = ({ eventId, enabled }) =>
-  useQuery({
+interface ShowEventArgs {
+  eventId: string;
+  enabled: boolean;
+}
+
+export const useShowEvents = ({ eventId, enabled }: ShowEventArgs) =>
+  useQuery<Event, Error>({
     queryKey: ["events", eventId],
     queryFn: () => eventsApi.show(eventId),
     enabled,

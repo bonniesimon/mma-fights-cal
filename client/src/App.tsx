@@ -3,7 +3,7 @@ import { useListEvents } from "./hooks/reactQuery/useEvents";
 import EventItem from "./components/EventItem";
 
 function App() {
-  const { data: { data } = {}, isLoading } = useListEvents();
+  const { data, isLoading } = useListEvents();
 
   if (isLoading) {
     return (
@@ -60,11 +60,20 @@ function App() {
           <EventItem key={event.id} event={event} />
         ))}
       </Container>
-    <Box as="footer" w="100%" py={4} mt={8} bg="gray.900" textAlign="center" borderTop="1px" borderColor="gray.700">
-      <Text color="gray.400" fontSize="sm">
-        © {new Date().getFullYear()} Made by a fight fan
-      </Text>
-    </Box>
+      <Box
+        as="footer"
+        w="100%"
+        py={4}
+        mt={8}
+        bg="gray.900"
+        textAlign="center"
+        borderTop="1px"
+        borderColor="gray.700"
+      >
+        <Text color="gray.400" fontSize="sm">
+          © {new Date().getFullYear()} Made by a fight fan
+        </Text>
+      </Box>
     </Box>
   );
 }
