@@ -1,25 +1,15 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Icon,
-  useDisclosure,
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Link,
-} from "@chakra-ui/react";
+import { Box, Flex, Text, Icon, useDisclosure, Link } from "@chakra-ui/react";
 import { Calendar, ChevronRight } from "lucide-react";
 import EventModal from "./EventModal";
 import { toIst } from "../utils/date";
 import { generateGoogleCalendarLink } from "../utils/calendarLink";
+import { Event } from "../types";
 
-const EventItem = ({ event }) => {
+interface Props {
+  event: Event;
+}
+
+const EventItem = ({ event }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { title, eventId, date } = event;
@@ -70,7 +60,7 @@ const EventItem = ({ event }) => {
             <Link
               isExternal
               href={googleCalendarLink}
-              onClick={e => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
               display="flex"
               alignItems="center"
               _hover={{ color: "yellow.300" }}
@@ -96,12 +86,7 @@ const EventItem = ({ event }) => {
           </Flex>
         </Flex>
       </Box>
-      <EventModal
-        eventId={eventId}
-        title={title}
-        isOpen={isOpen}
-        onClose={onClose}
-      />
+      <EventModal eventId={eventId} isOpen={isOpen} onClose={onClose} />
     </>
   );
 };

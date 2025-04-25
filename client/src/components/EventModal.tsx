@@ -16,14 +16,23 @@ import { useShowEvents } from "../hooks/reactQuery/useEvents";
 import { toIst } from "../utils/date";
 import FightItem from "./FightItem";
 import { generateGoogleCalendarLink } from "../utils/calendarLink";
+import { Fight } from "../types";
+import { ReactNode } from "react";
 
-const EventModal = ({ eventId, isOpen, onClose }) => {
-  const { data: { data } = {}, isLoading } = useShowEvents({
+interface Props {
+  eventId: string;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const EventModal = ({ eventId, isOpen, onClose }: Props) => {
+  const { data, isLoading } = useShowEvents({
     eventId,
     enabled: isOpen,
   });
 
-  const validateFights = (fights) => Array.isArray(fights) && fights.length > 0;
+  const validateFights = (fights: Fight[]) =>
+    Array.isArray(fights) && fights.length > 0;
 
   const mainFights = data?.fights.filter((fight) => fight.main) || [];
   const nonMainFights = data?.fights.filter((fight) => !fight.main) || [];
@@ -112,7 +121,15 @@ const EventModal = ({ eventId, isOpen, onClose }) => {
   );
 };
 
-const ModalWrapper = ({ isOpen, onClose, children }) => {
+const ModalWrapper = ({
+  isOpen,
+  onClose,
+  children,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
