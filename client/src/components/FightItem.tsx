@@ -1,6 +1,11 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
 import TruncatableTooltipText from "./TruncatableTooltipText";
-const FightItem = ({ fight }) => {
+import { Fight } from "../types";
+
+interface Props {
+  fight: Fight;
+}
+const FightItem = ({ fight }: Props) => {
   return (
     <Box
       mb={4}
@@ -37,9 +42,13 @@ const FightItem = ({ fight }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <TruncatableTooltipText fontWeight="bold" fontSize="lg" maxW="120px">
-  {fight.fighterA.name}
-</TruncatableTooltipText>
+                <TruncatableTooltipText
+                  fontWeight="bold"
+                  fontSize="lg"
+                  maxW="120px"
+                >
+                  {fight.fighterA.name}
+                </TruncatableTooltipText>
               </a>
               <img
                 src={fight.fighterA.country}
@@ -75,7 +84,14 @@ const FightItem = ({ fight }) => {
 
         <Flex align="center" flex={1} minW={0} gap={3} justify="flex-end">
           <Box minW={0} textAlign="right">
-            <Flex align="center" gap={2} mb={1} justify="flex-end" whiteSpace="nowrap" minW={0}>
+            <Flex
+              align="center"
+              gap={2}
+              mb={1}
+              justify="flex-end"
+              whiteSpace="nowrap"
+              minW={0}
+            >
               <img
                 src={fight.fighterB.country}
                 alt="flag"
@@ -91,9 +107,13 @@ const FightItem = ({ fight }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <TruncatableTooltipText fontWeight="bold" fontSize="lg" maxW="120px">
-  {fight.fighterB.name}
-</TruncatableTooltipText>
+                <TruncatableTooltipText
+                  fontWeight="bold"
+                  fontSize="lg"
+                  maxW="120px"
+                >
+                  {fight.fighterB.name}
+                </TruncatableTooltipText>
               </a>
             </Flex>
             <Text fontSize="sm" color="gray.200">
