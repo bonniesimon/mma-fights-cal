@@ -1,6 +1,7 @@
 import { google } from "calendar-link";
+import { Event, Fight } from "../types";
 
-export const generateGoogleCalendarLink = (event) => {
+export const generateGoogleCalendarLink = (event: Event) => {
   const calendarEvent = {
     title: event.title,
     description: generateFightsDescription(event.fights),
@@ -11,7 +12,7 @@ export const generateGoogleCalendarLink = (event) => {
   return google(calendarEvent);
 };
 
-const generateFightsDescription = (fights) => {
+const generateFightsDescription = (fights: Fight[]) => {
   const mainEventFights = fights.filter((fight) => fight.main);
   const nonMainEventFights = fights.filter((fight) => !fight.main);
 
@@ -21,7 +22,7 @@ const generateFightsDescription = (fights) => {
     (resultStr, currentFight) =>
       resultStr +
       `\n${currentFight.fighterA.name} vs ${currentFight.fighterB.name}`,
-    fightDescription
+    fightDescription,
   );
 
   fightDescription = fightDescription + "\n\nPrelims:\n";
@@ -30,7 +31,7 @@ const generateFightsDescription = (fights) => {
     (resultStr, currentFight) =>
       resultStr +
       `\n${currentFight.fighterA.name} vs ${currentFight.fighterB.name}`,
-    fightDescription
+    fightDescription,
   );
 
   return fightDescription;

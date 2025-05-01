@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import eventsApi from "../../api/events";
 
-import { Event } from "../../types/Event";
+import { Event } from "../../types";
 
 export const useListEvents = () => {
   return useQuery<Event[], Error>({

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = window.location.origin;
 
-import { Event } from "../types/Event";
+import { Event } from "../types";
 
 const list = async (): Promise<Event[]> => {
   const response = await axios.get(`${window.location.origin}/api/events`);
