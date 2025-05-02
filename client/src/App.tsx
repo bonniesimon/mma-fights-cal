@@ -5,7 +5,7 @@ import EventItem from "./components/EventItem";
 function App() {
   const { data, isLoading } = useListEvents();
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return (
       <Box minH="100vh" bg={"gray.800"} transition="all 0.2s">
         <Box
