@@ -6,6 +6,12 @@
 yarn dev # you can view the app at localhost:5173
 ```
 
+### Interact with SQLite3 database
+
+```bash
+sqlite3 database.sqlite
+```
+
 ### Running migrations
 
 ```bash
