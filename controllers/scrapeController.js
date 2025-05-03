@@ -1,5 +1,5 @@
 import Event from "../models/Event.js";
-import { handleDate } from "../utils/dateConversion.js";
+import { parseEventDateToUTCISO } from "../utils/dateConversion.js";
 import TapologyService from "../services/tapologyService.js";
 
 class ScrapeController {
@@ -27,7 +27,7 @@ class ScrapeController {
     const eventsToBeSaved = events.map((event) => ({
       ...event,
       eventId: event.link.split("/").at(-1),
-      date: handleDate(event.date),
+      date: parseEventDateToUTCISO(event.date),
     }));
 
     for (const event of eventsToBeSaved) {
