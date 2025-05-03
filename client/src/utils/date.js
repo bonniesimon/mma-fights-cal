@@ -1,8 +1,12 @@
-export const toIst = (utcDateString) => {
-  const utcDate = new Date(utcDateString);
+export const formatUtcToLocal = (utcDateString) => {
+  const date = new Date(utcDateString);
 
-  const istOptions = {
-    timeZone: "Asia/Kolkata",
+  if (isNaN(date.getTime())) {
+    console.error("Invalid date string provided:", utcDateString);
+    return "Invalid Date";
+  }
+
+  const localOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -13,7 +17,7 @@ export const toIst = (utcDateString) => {
     hour12: true,
   };
 
-  const istDateTime = utcDate.toLocaleString("en-IN", istOptions);
+  const localDateTime = date.toLocaleString(undefined, localOptions);
 
-  return istDateTime;
+  return localDateTime;
 };

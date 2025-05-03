@@ -1,7 +1,7 @@
 import { Box, Flex, Text, Icon, useDisclosure, Link } from "@chakra-ui/react";
 import { Calendar, ChevronRight } from "lucide-react";
 import EventModal from "./EventModal";
-import { toIst } from "../utils/date";
+import { formatUtcToLocal } from "../utils/date";
 import { generateGoogleCalendarLink } from "../utils/calendarLink";
 import { Event } from "../types";
 
@@ -52,7 +52,7 @@ const EventItem = ({ event }: Props) => {
             <Flex alignItems="center" mt={1} gap={1}>
               <Icon as={Calendar} color="gray.400" w={4} h={4} />
               <Text fontSize="sm" color="gray.300" isTruncated>
-                {toIst(date)}
+                {formatUtcToLocal(date)}
               </Text>
             </Flex>
           </Box>

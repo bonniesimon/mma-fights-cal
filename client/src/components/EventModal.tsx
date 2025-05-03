@@ -13,7 +13,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useShowEvents } from "../hooks/reactQuery/useEvents";
-import { toIst } from "../utils/date";
+import { formatUtcToLocal } from "../utils/date";
 import FightItem from "./FightItem";
 import { generateGoogleCalendarLink } from "../utils/calendarLink";
 import { Fight } from "../types";
@@ -57,7 +57,7 @@ const EventModal = ({ eventId, isOpen, onClose }: Props) => {
       <ModalCloseButton />
       <ModalBody>
         <Box mb={4}>
-          <Text>{toIst(data.date)}</Text>
+          <Text>{formatUtcToLocal(data.date)}</Text>
         </Box>
         <Box>
           <Box width="fit-content" mx="auto">
