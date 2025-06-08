@@ -1,5 +1,8 @@
 import Event from "../models/Event.js";
-import { parseEventDateToUTCISO } from "../utils/dateConversion.js";
+import {
+  addThreeHoursToDate,
+  parseEventDateToUTCISO,
+} from "../utils/dateConversion.js";
 import TapologyService from "../services/tapologyService.js";
 
 class ScrapeController {
@@ -27,7 +30,7 @@ class ScrapeController {
     const eventsToBeSaved = events.map((event) => ({
       ...event,
       eventId: event.link.split("/").at(-1),
-      date: parseEventDateToUTCISO(event.date),
+      date: parseEventDateToUTCISO(addThreeHoursToDate(event.date)),
     }));
 
     for (const event of eventsToBeSaved) {
