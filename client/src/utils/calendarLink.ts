@@ -1,9 +1,9 @@
-import { google } from "calendar-link";
+import { CalendarEvent, google } from "calendar-link";
 import { Event, Fight } from "../types";
 import { UnitType } from "dayjs";
 
 export const generateGoogleCalendarLink = (event: Event): string => {
-  const calendarEvent = {
+  const calendarEvent: CalendarEvent = {
     title: event.title,
     description: generateFightsDescription(event.fights),
     start: event.date,
