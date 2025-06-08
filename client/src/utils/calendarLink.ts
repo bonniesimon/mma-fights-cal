@@ -7,7 +7,7 @@ export const generateGoogleCalendarLink = (event: Event): string => {
     title: event.title,
     description: generateFightsDescription(event.fights),
     start: event.date,
-    duration: [6, "hour"] as [number, UnitType],
+    duration: [3, "hour"] as [number, UnitType],
   };
 
   return google(calendarEvent);
