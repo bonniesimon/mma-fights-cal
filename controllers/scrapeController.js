@@ -40,7 +40,7 @@ class ScrapeController {
       });
     }
 
-    res.json({ status: 200 });
+    res.redirect("/");
   }
 }
 
