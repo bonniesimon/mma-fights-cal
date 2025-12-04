@@ -3,11 +3,12 @@ import { Event, Fight } from "../types";
 import { UnitType } from "dayjs";
 
 export const generateGoogleCalendarLink = (event: Event): string => {
+  const duration: [number, UnitType] = [3, "hour"];
   const calendarEvent: CalendarEvent = {
     title: event.title,
     description: generateFightsDescription(event.fights),
     start: event.date,
-    duration: [3, "hour"] as [number, UnitType],
+    duration,
   };
 
   return google(calendarEvent);

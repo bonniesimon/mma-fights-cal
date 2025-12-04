@@ -56,7 +56,9 @@ function App() {
         py={{ base: 6, md: 10 }}
         px={{ base: 2, md: 0 }}
       >
-        {data?.map((event) => <EventItem key={event.id} event={event} />)}
+        {data.map((event) => (
+          <EventItem key={event.id} event={event} />
+        ))}
       </Container>
       <Box
         as="footer"
